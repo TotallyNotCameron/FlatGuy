@@ -7,10 +7,12 @@ public class MainClass extends JApplet {
 
 	public void init() {
 		Container c = getContentPane();
-		c.setBackground(Color.red);
+		c.setBackground(Color.white);
 
 	}
-
+	
+	
+	//paints junk
 	public void paint(Graphics g) {
 		super.paint(g);
 
