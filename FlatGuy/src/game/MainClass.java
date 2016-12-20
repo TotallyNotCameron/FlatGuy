@@ -18,6 +18,8 @@ public class MainClass extends JApplet {
 
 		g.setColor(Color.blue);
 		g.drawString("hi there, waddup", 60, 65);
+		g.setColor(Color.BLACK);
+		g.fillRect(60, 70, 100, 10);
 	}
 
 }
