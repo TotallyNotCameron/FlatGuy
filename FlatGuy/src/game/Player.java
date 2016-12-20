@@ -43,7 +43,7 @@ public class Player {
 			yVel -= jumpPower;
 		}
 		//gravity
-		yVel--;
+		yVel++;
 		
 		//move stuff
 		x += xVel;
