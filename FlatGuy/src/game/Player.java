@@ -49,4 +49,8 @@ public class Player {
 		isBackwardButtonPressed = k;
 	}
 	
+	public int getZ(){
+		return z;
+	}
+	
 }
