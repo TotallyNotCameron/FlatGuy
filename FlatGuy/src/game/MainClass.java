@@ -4,10 +4,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.*;
 
-public class MainClass extends JApplet implements ActionListener {
+@SuppressWarnings("serial")
+public class MainClass extends JApplet implements ActionListener, KeyListener {
 
 	Player mainDude = new Player();
 	Timer t;
@@ -63,6 +65,12 @@ public class MainClass extends JApplet implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		mainDude.timePassed();
 		repaint();
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
