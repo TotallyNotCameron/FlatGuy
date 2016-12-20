@@ -2,7 +2,7 @@ package game;
 
 // holds the position of all of the walls in the program
 
-public class Walls {
+public class Wall {
 
 	private int x;
 	private int y;
@@ -13,7 +13,7 @@ public class Walls {
 	private int length;
 	
 	
-	public Walls(int x, int y, int z, int width, int height, int length) {
+	public Wall(int x, int y, int z, int width, int height, int length) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
