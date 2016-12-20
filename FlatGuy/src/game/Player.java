@@ -24,9 +24,48 @@ public class Player {
 
 	
 	public Player() {
+		x = 0;
+		y = 0;
+		z = 0;
 		width = 100;
 		height = 100;
 	}	
+	
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public int getZ() {
+		return z;
+	}
+
+	public Player(int x, int y, int z) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+		width = 100;
+		height = 100;
+	}	
+	
+	public void moveRight(){
+		x++;
+	}
+	
+	public void moveLeft(){
+		x--;
+	}
 	
 	public void setRightButton(boolean k){
 		isRightButtonPressed = k;
