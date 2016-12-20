@@ -27,8 +27,26 @@ public class Player {
 	public Player() {
 		width = 100;
 		height = 100;
-	}
-
+	}	
 	
+	public void setRightButton(boolean k){
+		isRightButtonPressed = k;
+	}
+	
+	public void setLeftButton(boolean k){
+		isLeftButtonPressed = k;
+	}
+	
+	public void setUpButton(boolean k){
+		isUpButtonPressed = k;
+	}
+	
+	public void setForwardButton(boolean k){
+		isForwardButtonPressed = k;
+	}
+	
+	public void setBackwardButton(boolean k){
+		isBackwardButtonPressed = k;
+	}
 	
 }
