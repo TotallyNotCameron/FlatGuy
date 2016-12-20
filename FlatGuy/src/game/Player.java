@@ -19,7 +19,6 @@ public class Player {
 	//controls
 	boolean isRightButtonPressed;
 	boolean isLeftButtonPressed;
-	boolean isUpButtonPressed;
 	boolean isForwardButtonPressed;
 	boolean isBackwardButtonPressed;
 
@@ -35,10 +34,6 @@ public class Player {
 	
 	public void setLeftButton(boolean k){
 		isLeftButtonPressed = k;
-	}
-	
-	public void setUpButton(boolean k){
-		isUpButtonPressed = k;
 	}
 	
 	public void setForwardButton(boolean k){
