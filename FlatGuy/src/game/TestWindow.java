@@ -15,25 +15,15 @@ public class TestWindow extends JPanel implements ActionListener, KeyListener {
 	
 	
 	
-	Timer timer = new Timer(5, this);
-	private int x;
-	private int y;
-	private int xVel;
-	private int yVel;
-	private int xStartingPoint;
-	private int yStartingPoint;
+	Timer timer = new Timer(30, this);
 	private static int windowWidth;
 	private static int windowHeight;
+	Player dude = new Player();
 	
 	public TestWindow() {
-		x = 0;
-		y = 0;
+		
 		windowWidth = 800;
 		windowHeight = 600;
-		xVel = 0;
-		yVel = 0;
-		xStartingPoint = (windowWidth / 2);
-		yStartingPoint = (windowHeight / 2);
 		
 		timer.start();
 		addKeyListener(this);
@@ -43,32 +33,7 @@ public class TestWindow extends JPanel implements ActionListener, KeyListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		
-		if(x < 0) {
-			xVel = 0;
-			x = xStartingPoint;
-			y = yStartingPoint;
-		} 
-		
-		if(x > 800) {
-			xVel = 0;
-			x = xStartingPoint;
-			y = yStartingPoint;
-		}
-		
-		if(y < 0) {
-			yVel = 0;
-			x = xStartingPoint;
-			y = yStartingPoint;
-		}
-		
-		if(y > 600) {
-			yVel = 0;
-			x = xStartingPoint;
-			y = yStartingPoint;
-		}
-		
-		x = x + xVel;
-		y = y + yVel;
+		dude.timePassed();
 		repaint();
 	}
 	
@@ -80,23 +45,15 @@ public class TestWindow extends JPanel implements ActionListener, KeyListener {
 		
 		
 		if ( e.getKeyCode() == KeyEvent.VK_RIGHT){
-			xVel = 1;
-			yVel = 0;
+			dude.setRightButton(true);
 		}
 		
 		if ( e.getKeyCode() == KeyEvent.VK_LEFT){
-			xVel = -1;
-			yVel = 0;
+			dude.setLeftButton(true);
 		}
 		
 		if ( e.getKeyCode() == KeyEvent.VK_UP){
-			xVel = 0;
-			yVel = -1;
-		}
-
-		if ( e.getKeyCode() == KeyEvent.VK_DOWN){
-			xVel = 0;
-			yVel = 1;
+			dude.jump();
 		}
 	}
 	
@@ -105,8 +62,12 @@ public class TestWindow extends JPanel implements ActionListener, KeyListener {
 	}
 	
 	public void keyReleased(KeyEvent e){
-		xVel = 0;
-		yVel = 0;
+		if ( e.getKeyCode() == KeyEvent.VK_RIGHT){
+			dude.setRightButton(false);
+		}
+		if ( e.getKeyCode() == KeyEvent.VK_LEFT){
+			dude.setLeftButton(false);
+		}
 	}
 	
 	
@@ -121,8 +82,8 @@ public class TestWindow extends JPanel implements ActionListener, KeyListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		g.setColor(Color.BLACK);
-		g.fillRect(x, y, 50, 50);
+		g.setColor(Color.GREEN);
+		g.fillRect(dude.getX(), dude.getY(), dude.getWidth(), dude.getHeight());
 
 	}
 

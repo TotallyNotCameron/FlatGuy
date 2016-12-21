@@ -1,20 +1,18 @@
 package game;
 
-import java.awt.event.ActionListener;
-
-import javax.swing.Timer;
-
 public class Player {
 
 	// positions on the different axises
 	private int x;
 	private int y;
 	private int z;
-    private int jumpPower;
-	
+	private int jumpPower;
+
 	// width and height of the hitbox
 	private final int width;
 	private final int height;
+	private final int accelRate;
+	private final int speedLimit;
 
 	// velocities automagically initialized to 0
 	private double xVel;
@@ -28,42 +26,49 @@ public class Player {
 	private boolean isBackwardButtonPressed;
 	private boolean isJumpButtonPressed;
 	private boolean hasJumped;
-	
-	
-	
-	public void timePassed(){
-		//alters velocities
-		if (isRightButtonPressed){
-			xVel++;
+
+	public void timePassed() {
+		// alters velocities
+		if (isRightButtonPressed && xVel <= speedLimit) {
+			xVel += accelRate;
 		}
-		
-		if (isLeftButtonPressed){
-			xVel--;
+
+		if (isLeftButtonPressed && xVel >= -speedLimit) {
+			xVel -= accelRate;
 		}
-		
-		if(isJumpButtonPressed){
+
+		if (isJumpButtonPressed && !hasJumped) {
 			yVel -= jumpPower;
+			hasJumped = true;
+			isJumpButtonPressed = false;
 		}
-		
-		
-		
-		//gravity
+
+		// gravity
 		yVel++;
 		
+		//REMOVE THIS WHEN MAKING WALLS
+		if (y >= 450 && yVel > 0){
+			yVel = 0;
+			hasJumped = false;
+		}
 		
-		
-		//move stuff
+		// move stuff
 		x += xVel;
 		y += yVel;
 		
+		//remove this after making collision detection with walls and things
+		
+
 	}
-	
+
 	public Player() {
 		width = 50;
 		height = 50;
 		x = 100;
 		y = 200;
 		jumpPower = 20;
+		accelRate = 3;
+		speedLimit = 40;
 	}
 
 	public void setRightButton(boolean k) {
@@ -89,20 +94,20 @@ public class Player {
 	public int getX() {
 		return x;
 	}
-	
+
 	public int getY() {
 		return y;
 	}
-	
+
 	public int getZ() {
 		return z;
 	}
-	
-	public int getWidth(){
+
+	public int getWidth() {
 		return width;
 	}
-	
-	public int getHeight(){
+
+	public int getHeight() {
 		return height;
 	}
 
