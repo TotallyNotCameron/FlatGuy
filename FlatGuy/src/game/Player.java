@@ -13,6 +13,7 @@ public class Player {
 	private final int height;
 	private final int accelRate;
 	private final int speedLimit;
+	private final int gravity; 
 
 	// velocities automagically initialized to 0
 	private double xVel;
@@ -44,7 +45,7 @@ public class Player {
 		}
 
 		// gravity
-		yVel++;
+		yVel += gravity;
 		
 		//REMOVE THIS WHEN MAKING WALLS
 		if (y >= 450 && yVel > 0){
@@ -69,6 +70,7 @@ public class Player {
 		jumpPower = 20;
 		accelRate = 3;
 		speedLimit = 40;
+		gravity = 1;
 	}
 
 	public void setRightButton(boolean k) {
