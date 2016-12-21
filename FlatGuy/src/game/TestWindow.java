@@ -26,8 +26,8 @@ public class TestWindow extends JPanel implements ActionListener, KeyListener {
 	private static int windowHeight;
 	
 	public TestWindow() {
-		x = 0;
-		y = 0;
+		x = 375;
+		y = 275;
 		windowWidth = 800;
 		windowHeight = 600;
 		xVel = 0;
@@ -49,7 +49,7 @@ public class TestWindow extends JPanel implements ActionListener, KeyListener {
 			y = yStartingPoint;
 		} 
 		
-		if(x > 800) {
+		if(x > 750) {
 			xVel = 0;
 			x = xStartingPoint;
 			y = yStartingPoint;
@@ -61,7 +61,7 @@ public class TestWindow extends JPanel implements ActionListener, KeyListener {
 			y = yStartingPoint;
 		}
 		
-		if(y > 600) {
+		if(y > 550) {
 			yVel = 0;
 			x = xStartingPoint;
 			y = yStartingPoint;
@@ -101,7 +101,6 @@ public class TestWindow extends JPanel implements ActionListener, KeyListener {
 	}
 	
 	public void keyTyped(KeyEvent e){
-		
 	}
 	
 	public void keyReleased(KeyEvent e){
@@ -121,13 +120,24 @@ public class TestWindow extends JPanel implements ActionListener, KeyListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
+		g.setColor(Color.DARK_GRAY);
+		g.fillRect(0, 0, 800, 600);
+		
 		g.setColor(Color.BLACK);
 		g.fillRect(x, y, 50, 50);
+
 
 	}
 
 
 
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -140,7 +150,6 @@ public class TestWindow extends JPanel implements ActionListener, KeyListener {
 		jf.setSize(windowWidth, windowHeight);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jf.setResizable(false);
-		jf.setBackground(Color.GRAY);
 		jf.setTitle("FlatGuy");
 		jf.add(test);
 	}
