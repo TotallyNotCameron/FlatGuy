@@ -36,14 +36,21 @@ public class Player {
 		if (isRightButtonPressed){
 			xVel++;
 		}
+		
 		if (isLeftButtonPressed){
 			xVel--;
 		}
+		
 		if(isJumpButtonPressed){
 			yVel -= jumpPower;
 		}
+		
+		
+		
 		//gravity
 		yVel++;
+		
+		
 		
 		//move stuff
 		x += xVel;
