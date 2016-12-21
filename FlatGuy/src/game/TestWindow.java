@@ -76,20 +76,24 @@ public class TestWindow extends JPanel implements ActionListener, KeyListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
+		g.setColor(Color.BLACK);
+		
+		//draws the walls to the screen
+		for (int i = 0; i < Level.twoDimensionRecs[Level.getLevel()].length; i++){
+			g.fillRect((int)Level.twoDimensionRecs[Level.getLevel()][i].getX(), 
+					(int)Level.twoDimensionRecs[Level.getLevel()][i].getY(),
+					(int)Level.twoDimensionRecs[Level.getLevel()][i].getWidth(), 
+					(int)Level.twoDimensionRecs[Level.getLevel()][i].getHeight());
+		}
+		
 		g.setColor(Color.GREEN);
+		
 		g.fillRect(dude.getX(), dude.getY(), dude.getWidth(), dude.getHeight());
-
+		
+		
+        
 	}
 
-
-
-	
-	
-	
-	
-	
-	
-	
 	/**
 	 * Launch the application.
 	 */
@@ -105,7 +109,5 @@ public class TestWindow extends JPanel implements ActionListener, KeyListener {
 		jf.setTitle("FlatGuy");
 		jf.add(test);
 	}
-
-
-
+	
 }

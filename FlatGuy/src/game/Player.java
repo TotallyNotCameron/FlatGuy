@@ -47,33 +47,43 @@ public class Player {
 
 		// gravity
 		yVel += gravity;
-		
-		//REMOVE THIS WHEN MAKING WALLS
-		//other than that, this is the "ground" fric is higher on ground, lower in air
-		if (y >= 450 && yVel > 0){
+
+		// REMOVE THIS WHEN MAKING WALLS
+		// other than that, this is the "ground" fric is higher on ground, lower
+		// in air
+		if (y >= 450 && yVel > 0) {
+			yVel = 0;
+			hasJumped = false;
+			fricRate = .9;
+		} else {
+			fricRate = .99;
+		}
+
+		// apply friction
+		xVel = xVel * fricRate;
+
+		// move stuff
+		if (CollisionDetection.isAbleMoveRight(x, y, width, height, (int) xVel, (int) yVel)) {
+			x += xVel;
+		} else {
+			xVel = 0;
+		}
+		if (CollisionDetection.isAbleMoveDown(x, y, width, height, (int) xVel, (int) yVel)) {
+			y += yVel;
+			fricRate = .99;
+		} else {
 			yVel = 0;
 			hasJumped = false;
 			fricRate = .9;
 		}
-		else {
-			fricRate = .99;
-		}
-		
-		//apply friction
-		xVel = xVel * fricRate;
-		
-		// move stuff
-		x += xVel;
-		y += yVel;
-		
-		//remove this after making collision detection with walls and things
-		
+
+		// remove this after making collision detection with walls and things
 
 	}
 
 	public Player() {
-		width = 50;
-		height = 50;
+		width = 30;
+		height = 30;
 		x = 100;
 		y = 200;
 		jumpPower = 20;
