@@ -11,9 +11,10 @@ public class Player {
 	// width and height of the hitbox
 	private final int width;
 	private final int height;
-	private final int accelRate;
+	private final double accelRate;
 	private final int speedLimit;
-	private final int gravity; 
+	private final int gravity;
+	private double fricRate;
 
 	// velocities automagically initialized to 0
 	private double xVel;
@@ -48,10 +49,18 @@ public class Player {
 		yVel += gravity;
 		
 		//REMOVE THIS WHEN MAKING WALLS
+		//other than that, this is the "ground" fric is higher on ground, lower in air
 		if (y >= 450 && yVel > 0){
 			yVel = 0;
 			hasJumped = false;
+			fricRate = .9;
 		}
+		else {
+			fricRate = .99;
+		}
+		
+		//apply friction
+		xVel = xVel * fricRate;
 		
 		// move stuff
 		x += xVel;
@@ -68,9 +77,10 @@ public class Player {
 		x = 100;
 		y = 200;
 		jumpPower = 20;
-		accelRate = 3;
-		speedLimit = 40;
+		accelRate = 2;
+		speedLimit = 10;
 		gravity = 1;
+		fricRate = .9;
 	}
 
 	public void setRightButton(boolean k) {
