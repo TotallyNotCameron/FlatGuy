@@ -21,7 +21,7 @@ public class TestWindow extends JPanel implements ActionListener, KeyListener {
 	Player dude = new Player();
 	
 	public TestWindow() {
-		
+
 		windowWidth = 800;
 		windowHeight = 600;
 		
@@ -34,6 +34,7 @@ public class TestWindow extends JPanel implements ActionListener, KeyListener {
 	public void actionPerformed(ActionEvent e) {
 		
 		dude.timePassed();
+
 		repaint();
 	}
 	
@@ -58,7 +59,6 @@ public class TestWindow extends JPanel implements ActionListener, KeyListener {
 	}
 	
 	public void keyTyped(KeyEvent e){
-		
 	}
 	
 	public void keyReleased(KeyEvent e){
@@ -69,12 +69,6 @@ public class TestWindow extends JPanel implements ActionListener, KeyListener {
 			dude.setLeftButton(false);
 		}
 	}
-	
-	
-	
-	
-	
-	
 	
 	/*
 	 * Paint Method
@@ -89,6 +83,13 @@ public class TestWindow extends JPanel implements ActionListener, KeyListener {
 
 
 
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -101,7 +102,6 @@ public class TestWindow extends JPanel implements ActionListener, KeyListener {
 		jf.setSize(windowWidth, windowHeight);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jf.setResizable(false);
-		jf.setBackground(Color.GRAY);
 		jf.setTitle("FlatGuy");
 		jf.add(test);
 	}
