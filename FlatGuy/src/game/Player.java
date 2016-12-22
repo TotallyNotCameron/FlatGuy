@@ -48,16 +48,6 @@ public class Player {
 		// gravity
 		yVel += gravity;
 
-		// REMOVE THIS WHEN MAKING WALLS
-		// other than that, this is the "ground" fric is higher on ground, lower
-		// in air
-		if (y >= 450 && yVel > 0) {
-			yVel = 0;
-			hasJumped = false;
-			fricRate = .9;
-		} else {
-			fricRate = .99;
-		}
 
 		// apply friction
 		xVel = xVel * fricRate;
@@ -68,13 +58,15 @@ public class Player {
 		} else {
 			xVel = 0;
 		}
+		//when it's in the air
 		if (CollisionDetection.isAbleMoveDown(x, y, width, height, (int) xVel, (int) yVel)) {
 			y += yVel;
 			fricRate = .99;
+		//when it's touhing the ground
 		} else {
 			yVel = 0;
 			hasJumped = false;
-			fricRate = .9;
+			fricRate = .8;
 		}
 
 		// remove this after making collision detection with walls and things
