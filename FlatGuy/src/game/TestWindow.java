@@ -77,6 +77,7 @@ public class TestWindow extends JPanel implements ActionListener, KeyListener {
 		super.paintComponent(g);
 
 		g.setColor(Color.GREEN);
+		
 		g.fillRect(dude.getX(), dude.getY(), dude.getWidth(), dude.getHeight());
 
 	}
