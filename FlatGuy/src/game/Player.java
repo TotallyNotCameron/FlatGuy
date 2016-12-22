@@ -11,9 +11,10 @@ public class Player {
 	// width and height of the hitbox
 	private final int width;
 	private final int height;
-	private final int accelRate;
+	private final double accelRate;
 	private final int speedLimit;
-	private final int gravity; 
+	private final int gravity;
+	private double fricRate;
 
 	// velocities automagically initialized to 0
 	private double xVel;
@@ -46,31 +47,42 @@ public class Player {
 
 		// gravity
 		yVel += gravity;
-		
-		//REMOVE THIS WHEN MAKING WALLS
-		if (y >= 450 && yVel > 0){
+
+
+		// apply friction
+		xVel = xVel * fricRate;
+
+		// move stuff
+		if (CollisionDetection.isAbleMoveRight(x, y, width, height, (int) xVel, (int) yVel)) {
+			x += xVel;
+		} else {
+			xVel = 0;
+		}
+		//when it's in the air
+		if (CollisionDetection.isAbleMoveDown(x, y, width, height, (int) xVel, (int) yVel)) {
+			y += yVel;
+			fricRate = .99;
+		//when it's touhing the ground
+		} else {
 			yVel = 0;
 			hasJumped = false;
+			fricRate = .8;
 		}
-		
-		// move stuff
-		x += xVel;
-		y += yVel;
-		
-		//remove this after making collision detection with walls and things
-		
+
+		// remove this after making collision detection with walls and things
 
 	}
 
 	public Player() {
-		width = 50;
-		height = 50;
+		width = 30;
+		height = 30;
 		x = 100;
 		y = 200;
 		jumpPower = 20;
-		accelRate = 3;
-		speedLimit = 40;
+		accelRate = 2;
+		speedLimit = 10;
 		gravity = 1;
+		fricRate = .9;
 	}
 
 	public void setRightButton(boolean k) {
