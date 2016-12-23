@@ -109,6 +109,7 @@ public class GameWindow extends JPanel implements ActionListener, KeyListener {
 		jf.setTitle("FlatGuy");
 		jf.add(test);
 		
+		//change this when making a leveling system
 		Level.setLevel(0);
 	}
 	
