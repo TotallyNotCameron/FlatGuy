@@ -11,61 +11,65 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class TestWindow extends JPanel implements ActionListener, KeyListener {
-
+public class GameWindow extends JPanel implements ActionListener, KeyListener {
+	
+	
+	
 	Timer timer = new Timer(30, this);
 	private static int windowWidth;
 	private static int windowHeight;
 	Player dude = new Player();
-
-	public TestWindow() {
+	
+	public GameWindow() {
 
 		windowWidth = 800;
 		windowHeight = 600;
-
+		
 		timer.start();
 		addKeyListener(this);
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
 	}
-
+	
 	public void actionPerformed(ActionEvent e) {
-
+		
 		dude.timePassed();
 
 		repaint();
 	}
-
-	/*
+	
+	
+	/* 
 	 * Creating the controls
 	 */
 	public void keyPressed(KeyEvent e) {
-
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+		
+		
+		if ( e.getKeyCode() == KeyEvent.VK_RIGHT){
 			dude.setRightButton(true);
 		}
-
-		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+		
+		if ( e.getKeyCode() == KeyEvent.VK_LEFT){
 			dude.setLeftButton(true);
 		}
-
-		if (e.getKeyCode() == KeyEvent.VK_UP) {
+		
+		if ( e.getKeyCode() == KeyEvent.VK_UP){
 			dude.jump();
 		}
 	}
-
-	public void keyTyped(KeyEvent e) {
+	
+	public void keyTyped(KeyEvent e){
 	}
-
-	public void keyReleased(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+	
+	public void keyReleased(KeyEvent e){
+		if ( e.getKeyCode() == KeyEvent.VK_RIGHT){
 			dude.setRightButton(false);
 		}
-		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+		if ( e.getKeyCode() == KeyEvent.VK_LEFT){
 			dude.setLeftButton(false);
 		}
 	}
-
+	
 	/*
 	 * Paint Method
 	 */
@@ -73,15 +77,21 @@ public class TestWindow extends JPanel implements ActionListener, KeyListener {
 		super.paintComponent(g);
 
 		g.setColor(Color.BLACK);
-
-		// draws the walls to the screen
 		
+		//draws the walls to the screen
+		for (int i = 0; i <  Level.twoDimensionRects[dude.getZ()].length; i++) {
+			g.fillRect((int) Level.twoDimensionRects[dude.getZ()][i].getX(),
+					(int) Level.twoDimensionRects[dude.getZ()][i].getY(),
+					(int) Level.twoDimensionRects[dude.getZ()][i].getWidth(),
+					(int) Level.twoDimensionRects[dude.getZ()][i].getHeight());
 		}
-
+		
 		g.setColor(Color.GREEN);
-
+		
 		g.fillRect(dude.getX(), dude.getY(), dude.getWidth(), dude.getHeight());
-
+		
+		
+        
 	}
 
 	/**
@@ -89,7 +99,7 @@ public class TestWindow extends JPanel implements ActionListener, KeyListener {
 	 */
 	public static void main(String[] args) {
 
-		TestWindow test = new TestWindow();
+		GameWindow test = new GameWindow();
 
 		JFrame jf = new JFrame();
 		jf.setVisible(true);
@@ -99,9 +109,7 @@ public class TestWindow extends JPanel implements ActionListener, KeyListener {
 		jf.setTitle("FlatGuy");
 		jf.add(test);
 		
-		//change this when making leveling system
 		Level.setLevel(0);
-		
 	}
-
+	
 }
