@@ -16,11 +16,11 @@ public class CollisionDetection {
 
 		Rectangle right1 = new Rectangle(x + speedX, y, width, height);
 
-		for (int i = 0; i < Level.twoDimensionRecs[Level.getLevel()].length; i++){
-			if (right1.intersects(Level.twoDimensionRecs[Level.getLevel()][i])){
-				return false;
-			}
-		}
+//		for (int i = 0; i < Level.twoDimensionRecs[Level.getLevel()].length; i++){
+//			if (right1.intersects(Level.twoDimensionRecs[Level.getLevel()][i])){
+//				return false;
+//			}
+//		}
 		
 		
 		return true;
@@ -30,11 +30,11 @@ public class CollisionDetection {
 
 		Rectangle down1 = new Rectangle(x1, y1 + speedY, width1, height1);
 		
-		for (int i = 0; i < Level.twoDimensionRecs[Level.getLevel()].length; i++){
-			if (down1.intersects(Level.twoDimensionRecs[Level.getLevel()][i])){
-				return false;
-			}
-		}
+//		for (int i = 0; i < Level.twoDimensionRecs[Level.getLevel()].length; i++){
+//			if (down1.intersects(Level.twoDimensionRecs[Level.getLevel()][i])){
+//				return false;
+//			}
+//		}
 		
 		return true;
 	}

@@ -78,6 +78,7 @@ public class Player {
 		height = 30;
 		x = 100;
 		y = 200;
+		z = 150;
 		jumpPower = 20;
 		accelRate = 2;
 		speedLimit = 10;
