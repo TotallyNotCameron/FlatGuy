@@ -48,28 +48,28 @@ public class Player {
 		// gravity
 		yVel += gravity;
 
-
 		// apply friction
 		xVel = xVel * fricRate;
 
-		// move stuff
-		if (CollisionDetection.isAbleMoveRight(x, y, width, height, (int) xVel, (int) yVel)) {
+		// if can move right, move right
+		if (CollisionDetection.isAbleMoveX(x, y, width, height, (int) xVel, (int) yVel)) {
 			x += xVel;
 		} else {
 			xVel = 0;
 		}
-		//when it's in the air
-		if (CollisionDetection.isAbleMoveDown(x, y, width, height, (int) xVel, (int) yVel)) {
+		// when it's in the air
+		if (CollisionDetection.isAbleMoveY(x, y, width, height, (int) xVel, (int) yVel)) {
 			y += yVel;
 			fricRate = .99;
-		//when it's touhing the ground
+			// when it's touhing the ground
 		} else {
 			yVel = 0;
 			hasJumped = false;
-			fricRate = .8;
+			if (!isRightButtonPressed && !isLeftButtonPressed)
+				fricRate = .7;
+			else 
+				fricRate = .9;
 		}
-
-		// remove this after making collision detection with walls and things
 
 	}
 
