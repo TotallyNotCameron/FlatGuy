@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class TestWindow extends JPanel implements ActionListener, KeyListener {
+public class GameWindow extends JPanel implements ActionListener, KeyListener {
 	
 	
 	
@@ -20,7 +20,7 @@ public class TestWindow extends JPanel implements ActionListener, KeyListener {
 	private static int windowHeight;
 	Player dude = new Player();
 	
-	public TestWindow() {
+	public GameWindow() {
 
 		windowWidth = 800;
 		windowHeight = 600;
@@ -99,7 +99,7 @@ public class TestWindow extends JPanel implements ActionListener, KeyListener {
 	 */
 	public static void main(String[] args) {
 
-		TestWindow test = new TestWindow();
+		GameWindow test = new GameWindow();
 
 		JFrame jf = new JFrame();
 		jf.setVisible(true);
