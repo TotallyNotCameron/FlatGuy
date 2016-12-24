@@ -22,12 +22,12 @@ public class Player {
 	private double zVel;
 
 	// controls
-	private boolean isRightButtonPressed;
-	private boolean isLeftButtonPressed;
-	private boolean isForwardButtonPressed;
-	private boolean isBackwardButtonPressed;
-	private boolean isJumpButtonPressed;
-	private boolean hasJumped;
+	private boolean isRightButtonPressed = false;
+	private boolean isLeftButtonPressed = false;
+	private boolean isForwardButtonPressed = false;
+	private boolean isBackwardButtonPressed = false;
+	private boolean isJumpButtonPressed = false;
+	private boolean hasJumped = false;
 
 	public void timePassed() {
 		// alters velocities
@@ -39,10 +39,17 @@ public class Player {
 			xVel -= accelRate;
 		}
 
+		if (isForwardButtonPressed) {
+			zVel += accelRate / 10.0;
+		}
+
+		if (isBackwardButtonPressed) {
+			zVel -= accelRate / 10.0;
+		}
+
 		if (isJumpButtonPressed && !hasJumped) {
-			yVel -= jumpPower;
+			yVel = jumpPower;
 			hasJumped = true;
-			isJumpButtonPressed = false;
 		}
 
 		// gravity
@@ -58,7 +65,7 @@ public class Player {
 			xVel = 0;
 		}
 		// when it's in the air
-		if (CollisionDetection.isAbleMoveY(x, y, width, height, (int) xVel, (int) yVel)) {
+		if (CollisionDetection.isAbleMoveY(x, y, width, height, (int) xVel, (int) yVel) && y < 500) {
 			y += yVel;
 			fricRate = .99;
 			// when it's touhing the ground
@@ -67,9 +74,10 @@ public class Player {
 			hasJumped = false;
 			if (!isRightButtonPressed && !isLeftButtonPressed)
 				fricRate = .7;
-			else 
+			else
 				fricRate = .9;
 		}
+		z += zVel;
 
 	}
 
@@ -102,8 +110,8 @@ public class Player {
 		isBackwardButtonPressed = k;
 	}
 
-	public void jump() {
-		isJumpButtonPressed = true;
+	public void setJumpButton(boolean k) {
+		isJumpButtonPressed = k;
 	}
 
 	public int getX() {
@@ -124,6 +132,10 @@ public class Player {
 
 	public int getHeight() {
 		return height;
+	}
+
+	public boolean getBackwardButton() {
+		return isBackwardButtonPressed;
 	}
 
 }
