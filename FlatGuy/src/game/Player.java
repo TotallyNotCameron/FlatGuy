@@ -59,13 +59,13 @@ public class Player {
 		xVel = xVel * fricRate;
 
 		// if can move right, move right
-		if (CollisionDetection.isAbleMoveX(x, y, width, height, (int) xVel, (int) yVel)) {
+		if (CollisionDetection.isAbleMoveX(x, y, z, width, height, (int) xVel, (int) yVel)) {
 			x += xVel;
 		} else {
 			xVel = 0;
 		}
 		// when it's in the air
-		if (CollisionDetection.isAbleMoveY(x, y, width, height, (int) xVel, (int) yVel) && y < 500) {
+		if (CollisionDetection.isAbleMoveY(x, y, z, width, height, (int) xVel, (int) yVel)) {
 			y += yVel;
 			fricRate = .99;
 			// when it's touhing the ground
@@ -77,7 +77,12 @@ public class Player {
 			else
 				fricRate = .9;
 		}
-		z += zVel;
+		if (CollisionDetection.isAbleMoveZ(x, y, z, width, height, (int) xVel, (int) yVel, (int) zVel)
+				&& z + zVel > 10 && z + zVel < Level.twoDimensionRects.length - 10) {
+			z += zVel;
+		} else {
+			zVel = 0;
+		}
 
 	}
 
@@ -136,6 +141,14 @@ public class Player {
 
 	public boolean getJumpButton() {
 		return isJumpButtonPressed;
+	}
+
+	public boolean getBackwardButton() {
+		return isBackwardButtonPressed;
+	}
+
+	public boolean getForwardButton() {
+		return isForwardButtonPressed;
 	}
 
 }

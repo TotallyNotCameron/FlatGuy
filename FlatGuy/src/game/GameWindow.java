@@ -9,6 +9,7 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 @SuppressWarnings("serial")
@@ -69,7 +70,7 @@ public class GameWindow extends JPanel implements ActionListener, KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_LEFT)
 			dude.setLeftButton(false);
 
-		if (e.getKeyCode() == KeyEvent.VK_W)
+		if (e.getKeyCode() == KeyEvent.VK_E)
 			dude.setForwardButton(false);
 
 		if (e.getKeyCode() == KeyEvent.VK_D)
@@ -100,9 +101,11 @@ public class GameWindow extends JPanel implements ActionListener, KeyListener {
 
 		g.fillRect(dude.getX(), dude.getY(), dude.getWidth(), dude.getHeight());
 
-		g.setColor(Color.black);
+		g.setColor(Color.BLACK);
 		g.drawString("char z: " + dude.getZ(), 100, 100);
 		g.drawString("jumpbutton: " + dude.getJumpButton(), 100, 200);
+		g.drawString("backbutton: " + dude.getBackwardButton(), 100, 150);
+		g.drawString("forwardbutton: " + dude.getForwardButton(), 300, 150);
 	}
 
 	/**
@@ -110,18 +113,24 @@ public class GameWindow extends JPanel implements ActionListener, KeyListener {
 	 */
 	public static void main(String[] args) {
 
+		// change this when making a leveling system
+		Level.setLevel(0);
+				
 		GameWindow test = new GameWindow();
 
 		JFrame jf = new JFrame();
-		jf.setVisible(true);
+
 		jf.setSize(windowWidth, windowHeight);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jf.setResizable(false);
 		jf.setTitle("FlatGuy");
 		jf.add(test);
-
-		// change this when making a leveling system
-		Level.setLevel(0);
+		SwingUtilities.invokeLater( new Runnable() {
+			   public void run() {
+			      jf.setVisible( true );
+			   }
+			} );
+		
 	}
 
 }
