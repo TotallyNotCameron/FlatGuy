@@ -48,7 +48,7 @@ public class Player {
 		}
 
 		if (isJumpButtonPressed && !hasJumped) {
-			yVel = jumpPower;
+			yVel -= jumpPower;
 			hasJumped = true;
 		}
 
@@ -134,8 +134,8 @@ public class Player {
 		return height;
 	}
 
-	public boolean getBackwardButton() {
-		return isBackwardButtonPressed;
+	public boolean getJumpButton() {
+		return isJumpButtonPressed;
 	}
 
 }
