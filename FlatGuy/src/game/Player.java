@@ -28,6 +28,10 @@ public class Player {
 	private boolean isBackwardButtonPressed = false;
 	private boolean isJumpButtonPressed = false;
 	private boolean hasJumped = false;
+	
+	private boolean xSoundValid;
+	private boolean ySoundValid;
+	private boolean zSoundValid;
 
 	public void timePassed() {
 		// alters velocities
@@ -84,6 +88,35 @@ public class Player {
 			zVel = 0;
 		}
 
+		checkAudio();
+		
+	}
+	
+	private void checkAudio(){
+		if (!CollisionDetection.isAbleMoveX(x, y, z, width, height, (int) xVel, (int) yVel) && xSoundValid){
+			Audio.doAudioJunk("thud");
+			xSoundValid = false;
+		}
+		else if (!CollisionDetection.isAbleMoveY(x, y, z, width, height, (int) xVel, (int) yVel) && ySoundValid){
+			Audio.doAudioJunk("thud");
+			ySoundValid = false;
+		}
+		else if (!CollisionDetection.isAbleMoveZ(x, y, z, width, height, (int) xVel, (int) yVel, (int) zVel) && zSoundValid){
+			Audio.doAudioJunk("thud");
+			zSoundValid = false;
+		}
+		
+		
+		
+		if (CollisionDetection.isAbleMoveX(x, y, z, width, height, (int) xVel, (int) yVel)){
+			xSoundValid = true;
+		}
+		if (CollisionDetection.isAbleMoveY(x, y, z, width, height, (int) xVel, (int) yVel)){
+			ySoundValid = true;
+		}
+		if (CollisionDetection.isAbleMoveZ(x, y, z, width, height, (int) xVel, (int) yVel, (int) zVel)){
+			zSoundValid = true;
+		}
 	}
 
 	public Player() {
