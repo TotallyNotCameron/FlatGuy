@@ -44,14 +44,15 @@ public class Player {
 		}
 
 		if (isForwardButtonPressed) {
-			zVel += accelRate / 10.0;
+			zVel += accelRate;
 		}
 
 		if (isBackwardButtonPressed) {
-			zVel -= accelRate / 10.0;
+			zVel -= accelRate;
 		}
 
 		if (isJumpButtonPressed && !hasJumped) {
+			Audio.doAudioJunk("jump");
 			yVel -= jumpPower;
 			hasJumped = true;
 		}
@@ -61,6 +62,7 @@ public class Player {
 
 		// apply friction
 		xVel = xVel * fricRate;
+		zVel = zVel * fricRate;
 
 		// if can move right, move right
 		if (CollisionDetection.isAbleMoveX(x, y, z, width, height, (int) xVel, (int) yVel)) {

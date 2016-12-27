@@ -18,8 +18,9 @@ public class Level {
 
 	// Wall[level][walls in group]
 	private static Wall[][] wallarrs = { 
-			{ new Wall(0, 400, 0, 700, 50, 500), new Wall(200, 300, 50, 100, 50, 350) }, // walls in level 1																									/																																												// 1
-			{ new Wall(0, 400, 0, 700, 50, 500) } 										// walls in level 2
+			{ new Wall(0, 500, 0, 800, 100, 500), new Wall(300, 400, 200, 250, 100, 50), 
+				new Wall(350, 300, 200, 150, 100, 50),new Wall(400, 200, 200, 50, 100, 50) }, // walls in level 0																						/																																												// 1
+			{ new Wall(0, 400, 0, 700, 50, 500) } 										// walls in level 1
 
 	};
 
