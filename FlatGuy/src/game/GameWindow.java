@@ -58,6 +58,14 @@ public class GameWindow extends JPanel implements ActionListener, KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_UP)
 			dude.setJumpButton(true);
 
+		if(e.getKeyCode() == KeyEvent.VK_0){
+			Level.setLevel(0);
+		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_1){
+			Level.setLevel(1);
+		}
+		
 	}
 
 	public void keyTyped(KeyEvent e) {
