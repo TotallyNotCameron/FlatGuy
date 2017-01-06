@@ -103,6 +103,7 @@ public class GameWindow extends JPanel implements ActionListener, KeyListener {
 
 		g.setColor(Color.BLACK);
 		g.drawString("char z: " + dude.getZ(), 100, 100);
+		g.drawString("char y: " + dude.getY(), 100, 300);
 		g.drawString("jumpbutton: " + dude.getJumpButton(), 100, 200);
 		g.drawString("backbutton: " + dude.getBackwardButton(), 100, 150);
 		g.drawString("forwardbutton: " + dude.getForwardButton(), 300, 150);

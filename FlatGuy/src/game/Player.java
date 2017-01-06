@@ -11,6 +11,8 @@ public class Player {
 	// width and height of the hitbox
 	private final int width;
 	private final int height;
+	
+	//some other stuff that affects movement
 	private final double accelRate;
 	private final int speedLimit;
 	private final int gravity;
@@ -44,7 +46,7 @@ public class Player {
 		}
 
 		if (isForwardButtonPressed) {
-			zVel += accelRate;
+			zVel += accelRate * 2;
 		}
 
 		if (isBackwardButtonPressed) {
@@ -85,7 +87,7 @@ public class Player {
 		}
 		if (CollisionDetection.isAbleMoveZ(x, y, z, width, height, (int) xVel, (int) yVel, (int) zVel)
 				&& z + zVel > 10 && z + zVel < Level.twoDimensionRects.length - 10) {
-			z += zVel;
+			z += zVel / 5;
 		} else {
 			zVel = 0;
 		}
