@@ -58,6 +58,14 @@ public class GameWindow extends JPanel implements ActionListener, KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_UP)
 			dude.setJumpButton(true);
 
+		if(e.getKeyCode() == KeyEvent.VK_0){
+			Level.setLevel(0);
+		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_1){
+			Level.setLevel(1);
+		}
+		
 	}
 
 	public void keyTyped(KeyEvent e) {
@@ -103,6 +111,7 @@ public class GameWindow extends JPanel implements ActionListener, KeyListener {
 
 		g.setColor(Color.BLACK);
 		g.drawString("char z: " + dude.getZ(), 100, 100);
+		g.drawString("char y: " + dude.getY(), 100, 300);
 		g.drawString("jumpbutton: " + dude.getJumpButton(), 100, 200);
 		g.drawString("backbutton: " + dude.getBackwardButton(), 100, 150);
 		g.drawString("forwardbutton: " + dude.getForwardButton(), 100, 175);
