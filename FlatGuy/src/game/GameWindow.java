@@ -139,13 +139,14 @@ public class GameWindow extends JPanel implements ActionListener, KeyListener {
 		}
 
 		if (!isPaused) {
+			
+			//sets backgroud colour
 			Color back = new Color(150, dude.getZ() / 3, 250 - dude.getZ() / 2);
 			g.setColor(back);
 			g.fillRect(0, 0, 900, 600);
 
-			g.setColor(Color.BLACK);
-
 			// draws the walls to the screen
+			g.setColor(Color.BLACK);
 			for (int i = 0; i < Level.twoDimensionRects[dude.getZ()].length; i++) {
 				g.fillRect((int) Level.twoDimensionRects[dude.getZ()][i].getX(),
 						(int) Level.twoDimensionRects[dude.getZ()][i].getY(),
@@ -156,9 +157,6 @@ public class GameWindow extends JPanel implements ActionListener, KeyListener {
 
 			g.fillRect(Level.goalRects[dude.getZ()].x, Level.goalRects[dude.getZ()].y,
 					Level.goalRects[dude.getZ()].width, Level.goalRects[dude.getZ()].height);
-
-			g.setColor(Color.GREEN);
-
 			
 			g.drawImage(playerImage, dude.getX(), dude.getY(), dude.getWidth(), dude.getHeight(), this);
 		
