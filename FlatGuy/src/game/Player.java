@@ -11,12 +11,12 @@ public class Player {
 	// width and height of the hitbox
 	private final int width;
 	private final int height;
-	
-	//some other stuff that affects movement
+
+	// some other stuff that affects movement
 	private final double accelRate;
 	private final int speedLimit;
 	private final int gravity;
-	private double fricRate;
+	public double fricRate;
 
 	// velocities automagically initialized to 0
 	private double xVel;
@@ -30,12 +30,28 @@ public class Player {
 	private boolean isBackwardButtonPressed = false;
 	private boolean isJumpButtonPressed = false;
 	private boolean hasJumped = false;
-	
+
 	private boolean xSoundValid;
 	private boolean ySoundValid;
 	private boolean zSoundValid;
 
+
+	public Player() {
+		width = 30;
+		height = 30;
+		x = 100;
+		y = 200;
+		z = 200;
+		jumpPower = 19;
+		accelRate = 2;
+		speedLimit = 10;
+		gravity = 1;
+		fricRate = .9;
+	}
+
+	
 	public void timePassed() {
+
 		// alters velocities
 		if (isRightButtonPressed && xVel <= speedLimit) {
 			xVel += accelRate;
@@ -46,16 +62,16 @@ public class Player {
 		}
 
 		if (isForwardButtonPressed) {
-			zVel += accelRate * 2;
-		}
-
-		if (isBackwardButtonPressed) {
-			zVel -= accelRate;
+			zVel = 2;
+		} else if (isBackwardButtonPressed) {
+			zVel = -2;
+		} else {
+			zVel = 0;
 		}
 
 		if (isJumpButtonPressed && !hasJumped) {
 			Audio.doAudioJunk("jump");
-			yVel -= jumpPower;
+			yVel = -jumpPower;
 			hasJumped = true;
 		}
 
@@ -64,8 +80,12 @@ public class Player {
 
 		// apply friction
 		xVel = xVel * fricRate;
-		zVel = zVel * fricRate;
 
+		if (xVel < 1 && xVel > -1) {
+			xVel = 0;
+		}
+
+		
 		// if can move right, move right
 		if (CollisionDetection.isAbleMoveX(x, y, z, width, height, (int) xVel, (int) yVel)) {
 			x += xVel;
@@ -76,64 +96,59 @@ public class Player {
 		if (CollisionDetection.isAbleMoveY(x, y, z, width, height, (int) xVel, (int) yVel)) {
 			y += yVel;
 			fricRate = .99;
-			// when it's touhing the ground
-		} else {
+		}
+		// when it's touching the ground
+		else{
 			yVel = 0;
-			hasJumped = false;
 			if (!isRightButtonPressed && !isLeftButtonPressed)
 				fricRate = .7;
 			else
 				fricRate = .9;
 		}
-		if (CollisionDetection.isAbleMoveZ(x, y, z, width, height, (int) xVel, (int) yVel, (int) zVel)
-				&& z + zVel > 10 && z + zVel < Level.twoDimensionRects.length - 10) {
-			z += zVel / 5;
-		} else {
-			zVel = 0;
-		}
-
-		checkAudio();
 		
+		if (!CollisionDetection.isAbleMoveDown(x, y, z, width, height, (int)xVel, (int)yVel))
+			hasJumped = false;
+		
+		
+		
+		if (CollisionDetection.isAbleMoveZ(x, y, z, width, height, (int) xVel, (int) yVel, (int) zVel) && z + zVel > 10
+				&& z + zVel < Level.twoDimensionRects.length - 10) {
+			z += zVel;
+		}
+		
+		if (CollisionDetection.isTouchingExit(this)){
+			Level.setLevel(Level.getLevel() + 1);
+			this.x = Level.startingPos[Level.getLevel()].getX();
+			this.y = Level.startingPos[Level.getLevel()].getY();
+			this.z = Level.startingPos[Level.getLevel()].getZ();
+		}
+		
+		checkAudio();
+
 	}
-	
-	private void checkAudio(){
-		if (!CollisionDetection.isAbleMoveX(x, y, z, width, height, (int) xVel, (int) yVel) && xSoundValid){
+
+	private void checkAudio() {
+		if (!CollisionDetection.isAbleMoveX(x, y, z, width, height, (int) xVel, (int) yVel) && xSoundValid) {
 			Audio.doAudioJunk("thud");
 			xSoundValid = false;
-		}
-		else if (!CollisionDetection.isAbleMoveY(x, y, z, width, height, (int) xVel, (int) yVel) && ySoundValid){
+		} else if (!CollisionDetection.isAbleMoveY(x, y, z, width, height, (int) xVel, (int) yVel) && ySoundValid) {
 			Audio.doAudioJunk("thud");
 			ySoundValid = false;
-		}
-		else if (!CollisionDetection.isAbleMoveZ(x, y, z, width, height, (int) xVel, (int) yVel, (int) zVel) && zSoundValid){
+		} else if (!CollisionDetection.isAbleMoveZ(x, y, z, width, height, (int) xVel, (int) yVel, (int) zVel)
+				&& zSoundValid) {
 			Audio.doAudioJunk("thud");
 			zSoundValid = false;
 		}
-		
-		
-		
-		if (CollisionDetection.isAbleMoveX(x, y, z, width, height, (int) xVel, (int) yVel)){
+
+		if (CollisionDetection.isAbleMoveX(x, y, z, width, height, (int) xVel, (int) yVel)) {
 			xSoundValid = true;
 		}
-		if (CollisionDetection.isAbleMoveY(x, y, z, width, height, (int) xVel, (int) yVel)){
+		if (CollisionDetection.isAbleMoveY(x, y, z, width, height, (int) xVel, (int) yVel)) {
 			ySoundValid = true;
 		}
-		if (CollisionDetection.isAbleMoveZ(x, y, z, width, height, (int) xVel, (int) yVel, (int) zVel)){
+		if (CollisionDetection.isAbleMoveZ(x, y, z, width, height, (int) xVel, (int) yVel, (int) zVel)) {
 			zSoundValid = true;
 		}
-	}
-
-	public Player() {
-		width = 30;
-		height = 30;
-		x = 100;
-		y = 200;
-		z = 150;
-		jumpPower = 20;
-		accelRate = 2;
-		speedLimit = 10;
-		gravity = 1;
-		fricRate = .9;
 	}
 
 	public void setRightButton(boolean k) {
@@ -176,16 +191,14 @@ public class Player {
 		return height;
 	}
 
-	public boolean getJumpButton() {
-		return isJumpButtonPressed;
+	public void setX(int x){
+		this.x = x;
 	}
-
-	public boolean getBackwardButton() {
-		return isBackwardButtonPressed;
+	public void setY(int y){
+		this.y = y;
 	}
-
-	public boolean getForwardButton() {
-		return isForwardButtonPressed;
+	public void setZ(int z){
+		this.z = z;
 	}
-
+	
 }
